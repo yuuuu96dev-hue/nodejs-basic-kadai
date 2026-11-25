@@ -12,20 +12,16 @@ async function fetchData() {
   }, 100);
 
   try {
-    fetch(url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log('データ取得が完了しました。取得件数：' + data.length);
-        console.log('ユーザー一覧：');
-        for (i = 0; i < data.length; i++) {
-          console.log(data[i].name);
-        }
-        console.log('ユーザーデータの取得が終了しました。');
-      })
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log('データ取得が完了しました。取得件数：' + data.length);
+    console.log('ユーザー一覧：');
+    for (const user of data) {
+      console.log(user.name);
+    }
+    console.log('ユーザーデータの取得が終了しました。');
   } catch (err) {
-    console.error('エラー発生：', error);
+    console.error('エラー発生：', err);
   }
 }
 
